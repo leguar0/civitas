@@ -1,9 +1,20 @@
 #include <gtest/gtest.h>
+#include "city.hpp"
+#include "building.hpp"
 
-// Demonstrate some basic assertions.
-TEST(HelloTest, BasicAssertions) {
-  // Expect two strings not to be equal.
-  EXPECT_STRNE("hello", "world");
-  // Expect equality.
-  EXPECT_EQ(7 * 6, 42);
+
+struct CityTest : public ::testing::Test {
+    City city;
+};
+
+
+TEST_F(CityTest, CanAddBuildingToCity)
+{
+    EXPECT_TRUE(
+        city.addBuilding(
+            Building {
+                 BuildingType::police_station 
+            }
+        )
+    );
 }
