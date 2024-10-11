@@ -15,9 +15,15 @@ class Building
 {
 private:
     BuildingType type_;
+    int people_;
 public:
     Building(BuildingType type);
     ~Building() = default;
+
+    void addPeople(int people);
+    void removePeople(int people);
+
+    int getPeople() const;
 };
 
 
