@@ -1,17 +1,28 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(Civitas)
+project(Civitas VERSION 1.0.0 LANGUAGES CXX)
 
 set(
     SOURCE
+    qml/qml.qrc
+    qml/main.qml
     src/city.cpp
     src/building.cpp
 )
 
-add_executable(${PROJECT_NAME} ${SOURCE} src/main.cpp)
-
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml)
+qt_standard_project_setup()
+
+qt_add_executable(${PROJECT_NAME} ${SOURCE} src/main.cpp)
+
+#add_executable(${PROJECT_NAME} ${SOURCE} src/main.cpp)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Qml Qt6::Quick Qt6::Core)
 
 include(FetchContent)
 FetchContent_Declare(
