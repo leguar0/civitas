@@ -8,9 +8,13 @@ class City
 {
 private:
     std::vector<Building> buildings_;
+    int people_;
+    float money_;
 public:
     City();
     ~City() = default;
+
+    std::vector<Building>& getBuildings();
 
     bool addBuilding(Building building);
 };
