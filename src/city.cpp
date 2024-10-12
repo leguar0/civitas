@@ -5,16 +5,24 @@ City::City()
     , money_(100.0)
 {}
 
-std::vector<Building>& City::getBuildings()
+const std::vector<Building>& City::getBuildings() const
 {
-    return buildings_;
+    return buildingManager_.getBuildings();
 }
 
-bool City::addBuilding(Building building)
+bool City::addBuilding(BuildingType type)
 {
-    buildings_.push_back(building);
-    if (!buildings_.empty())
-        return true;
+    int cost = buildingManager_.getCostBuilding(type);
+    if (money_ >= cost) {
+        money_-= cost;
+
+        return true;    
+    }
+
     return false;
 }
 
+bool City::removeBuilding(const int id)
+{
+    return buildingManager_.removeBuilding(id);
+}

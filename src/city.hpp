@@ -3,20 +3,26 @@
 
 #include <vector>
 #include "building.hpp"
+#include "buildingManager.hpp"
 
 class City
 {
 private:
-    std::vector<Building> buildings_;
+    BuildingManager buildingManager_;
     int people_;
     float money_;
 public:
     City();
     ~City() = default;
 
-    std::vector<Building>& getBuildings();
+    const std::vector<Building>& getBuildings() const;
+    Building* getBuilding(const int id);
 
-    bool addBuilding(Building building);
+    bool addBuilding(BuildingType type);
+    bool removeBuilding(const int id);
+
+    bool addPeopleToBuilding(const int id, const int people);
+    bool removePeopleFromBuilding(const int id, const int people);
 };
 
 #endif
