@@ -2,7 +2,7 @@
 
 auto BuildingManager::findBuildingIterator(const int index) const
 {
-    return std::find_if(buildings_.begin(), buildings_.end(), [&](Building& b) {
+    return std::find_if(buildings_.begin(), buildings_.end(), [&](const Building& b) {
         return b.getId() == index;
     });
 }

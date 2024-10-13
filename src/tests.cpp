@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <iostream>
 #include "city.hpp"
 #include "building.hpp"
 
@@ -10,18 +11,14 @@ struct CityTest : public ::testing::Test {
 
 TEST_F(CityTest, CanAddBuildingToCity)
 {
-    Building building {BuildingType::hospital};
-
-    EXPECT_TRUE(city.addBuilding(building));
+    EXPECT_TRUE(city.addBuilding(BuildingType::house));
 
 }
 
 TEST_F(CityTest, CanAddPeopleToBuilding)
 {
-    Building building {BuildingType::police_station};
-    int value = 10;
-    city.addBuilding(building);
-    EXPECT_FALSE(city.getBuildings().empty());
-    city.getBuildings()[0].addPeople(value);
-    EXPECT_EQ(city.getBuildings()[0].getPeople(), value);
+    int value = 5;
+    city.addBuilding(BuildingType::house);
+    EXPECT_TRUE(city.addPeopleToBuilding(0, value));
+    EXPECT_EQ(city.getBuilding(1)->getPeople(), value);
 }

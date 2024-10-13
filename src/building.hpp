@@ -9,7 +9,8 @@ enum class BuildingType {
     power_station,
     subway,
     apartment_building,
-    mine
+    mine,
+    sawmill
 };
 
 class Building
@@ -30,6 +31,5 @@ public:
     int getId() const;
     int getPeople() const;
 };
-int Building::nextId = 0;
 
 #endif
