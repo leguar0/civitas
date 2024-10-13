@@ -18,7 +18,7 @@ class Building
 private:
     static int nextId;
 
-    int id;
+    int id_;
     BuildingType type_;
 public:
     Building(BuildingType type);
