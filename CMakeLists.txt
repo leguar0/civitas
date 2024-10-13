@@ -9,6 +9,7 @@ set(
     src/city.cpp
     src/building.cpp
     src/buildingManager.cpp
+    src/resourceManager.cpp
 )
 
 set(CMAKE_AUTOUIC ON)
