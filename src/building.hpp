@@ -20,16 +20,11 @@ private:
 
     int id;
     BuildingType type_;
-    int people_;
 public:
     Building(BuildingType type);
     ~Building() = default;
 
-    void addPeople(int people);
-    void removePeople(int people);
-
     int getId() const;
-    int getPeople() const;
 };
 
 #endif

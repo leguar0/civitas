@@ -20,9 +20,6 @@ public:
     
     bool addBuilding(BuildingType type);
     bool removeBuilding(const int id);
-
-    bool addPeopleToBuilding(const int id, const int people);
-    bool removePeopleFromBuilding(const int id, const int people);
 };
 
 #endif

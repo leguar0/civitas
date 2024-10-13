@@ -19,9 +19,7 @@ public:
 
     void addBuilding(BuildingType type);
     bool removeBuilding(const int index);
-    bool addPeopleToBuilding(const int index, const int people);
-    bool removePeopleFromBuilding(const int index, const int people);
-
+    
     int getCostBuilding(BuildingType type) const;
     Building* getBuilding(const int index) const;
     const std::vector<Building>& getBuildings() const;

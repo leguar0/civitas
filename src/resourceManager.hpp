@@ -28,7 +28,6 @@ public:
     ResourceManager();
     ~ResourceManager() = default;
 
-    bool removePeople(int people);
     bool removeMoney(int money);
     
     void newGenerationPeople();

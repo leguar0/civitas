@@ -15,6 +15,7 @@ TEST_F(CityTest, CanAddBuildingToCity)
 
 }
 
+/*
 TEST_F(CityTest, CanAddPeopleToBuilding)
 {
     int value = 5;
@@ -22,3 +23,4 @@ TEST_F(CityTest, CanAddPeopleToBuilding)
     EXPECT_TRUE(city.addPeopleToBuilding(0, value));
     EXPECT_EQ(city.getBuilding(1)->getPeople(), value);
 }
+*/
