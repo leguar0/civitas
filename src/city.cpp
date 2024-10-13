@@ -13,6 +13,16 @@ Building* City::getBuilding(const int index)
     return buildingManager_.getBuilding(index);
 }
 
+int City::getPeople() const
+{
+    return resourceManager_.getPeople();
+}
+
+double City::getMoney() const
+{
+    return resourceManager_.getMoney();
+}
+
 bool City::addBuilding(BuildingType type)
 {
     double cost = buildingManager_.getCostBuilding(type);

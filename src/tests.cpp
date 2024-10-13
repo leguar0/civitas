@@ -12,7 +12,7 @@ struct CityTest : public ::testing::Test {
 TEST_F(CityTest, CanAddBuildingToCity)
 {
     EXPECT_TRUE(city.addBuilding(BuildingType::house));
-
+    std::cout << city.getMoney() << std::endl;
 }
 
 /*

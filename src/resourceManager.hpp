@@ -36,6 +36,8 @@ public:
     void addResource(Resource resource, int amount);
     bool consumeResource(Resource resource, int amount);
 
+    int getPeople() const;
+    double getMoney() const;
     int getResourceAmount(Resource resource) const;
     bool hasEnoughResources(Resource resource, int amount) const;
 };

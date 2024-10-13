@@ -69,6 +69,16 @@ bool ResourceManager::consumeResource(Resource resource, int amount)
     return false;
 }
 
+int ResourceManager::getPeople() const
+{
+    return (people_.at(Gender::male) + people_.at(Gender::female) );
+}
+
+double ResourceManager::getMoney() const
+{
+    return money_;
+}
+
 int ResourceManager::getResourceAmount(Resource resource) const
 {
     return resources_.at(resource);

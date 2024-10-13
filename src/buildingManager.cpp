@@ -36,29 +36,6 @@ bool BuildingManager::removeBuilding(const int index)
     return false;
 }
 
-bool BuildingManager::addPeopleToBuilding(const int index, const int people)
-{
-    if (index >= 0 && index < buildings_.size()) {
-        buildings_[index].addPeople(people);
-
-        return true;
-    }
-
-    return false;
-}
-
-bool BuildingManager::removePeopleFromBuilding(const int index, const int people)
-{
-    if (index >= 0 && index < buildings_.size()) {
-        if (buildings_[index].getPeople() >= people) {
-            buildings_[index].removePeople(people);
-            return true;
-        }
-    }
-
-    return false;
-}
-
 int BuildingManager::getCostBuilding(BuildingType type) const
 {
     return buildingCosts_.at(type);
