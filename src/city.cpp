@@ -1,6 +1,7 @@
 #include "city.hpp"
 
-City::City(std::shared_ptr<IBuildingManager> buildingManager, std::shared_ptr<IResourceManager> resourceManager)
+City::City(std::shared_ptr<IBuildingManager> buildingManager, 
+           std::shared_ptr<IResourceManager> resourceManager)
     : buildingManager_(std::move(buildingManager))
     , resourceManager_(std::move(resourceManager))
 {}

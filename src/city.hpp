@@ -13,7 +13,8 @@ private:
     std::shared_ptr<IBuildingManager> buildingManager_;
     std::shared_ptr<IResourceManager> resourceManager_;
 public:
-    City(std::shared_ptr<IBuildingManager> buildManager, std::shared_ptr<IResourceManager> resourceManager);
+    City(std::shared_ptr<IBuildingManager> buildManager,
+         std::shared_ptr<IResourceManager> resourceManager);
     ~City() = default;
 
     const std::vector<Building>& getBuildings() const;

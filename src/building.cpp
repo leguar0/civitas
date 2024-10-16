@@ -1,6 +1,6 @@
 #include "building.hpp"
 
-int Building::nextId = 0;
+int Building::nextId = -1;
 
 Building::Building(BuildingType type)
     : id_(nextId++)
