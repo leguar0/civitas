@@ -1,33 +1,35 @@
 #include "city.hpp"
 
-City::City()
+City::City(std::shared_ptr<IBuildingManager> buildingManager, std::shared_ptr<IResourceManager> resourceManager)
+    : buildingManager_(std::move(buildingManager))
+    , resourceManager_(std::move(resourceManager))
 {}
 
 const std::vector<Building>& City::getBuildings() const
 {
-    return buildingManager_.getBuildings();
+    return buildingManager_->getBuildings();
 }
 
 Building* City::getBuilding(const int index)
 {
-    return buildingManager_.getBuilding(index);
+    return buildingManager_->getBuilding(index);
 }
 
 int City::getPeople() const
 {
-    return resourceManager_.getPeople();
+    return resourceManager_->getPeople();
 }
 
 double City::getMoney() const
 {
-    return resourceManager_.getMoney();
+    return resourceManager_->getMoney();
 }
 
 bool City::addBuilding(BuildingType type)
 {
-    double cost = buildingManager_.getCostBuilding(type);
-    if (resourceManager_.removeMoney(cost)) {
-        buildingManager_.addBuilding(type);
+    double cost = buildingManager_->getCostBuilding(type);
+    if (resourceManager_->removeMoney(cost)) {
+        buildingManager_->addBuilding(type);
         return true;    
     }
 
@@ -36,5 +38,5 @@ bool City::addBuilding(BuildingType type)
 
 bool City::removeBuilding(const int id)
 {
-    return buildingManager_.removeBuilding(id);
+    return buildingManager_->removeBuilding(id);
 }

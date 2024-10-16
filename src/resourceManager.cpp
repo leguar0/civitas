@@ -20,35 +20,14 @@ ResourceManager::ResourceManager()
     });
 }
 
-bool ResourceManager::removeMoney(int money)
+bool ResourceManager::removeMoney(double amount)
 {
-    if (money_ >= money) {
-        money_ -= money;
+    if (money_ >= amount) {
+        money_ -= amount;
 
         return true;
     }
     return false;
-}
-
-void ResourceManager::newGenerationPeople()
-{
-    int male = people_.at(Gender::male);
-    int female = people_.at(Gender::female);
-
-    int pairs = std::min(male, female);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, pairs);
-    int newMales = dis(gen);
-    int newFemales = pairs - newMales;
-
-    people_[Gender::male] += newMales;
-    people_[Gender::female] += newFemales;
-}
-
-void ResourceManager::generateMoney()
-{
-    money_ += (people_[Gender::male]+people_[Gender::female])*0.15;
 }
 
 void ResourceManager::addResource(Resource resource, int amount)
@@ -82,6 +61,27 @@ double ResourceManager::getMoney() const
 int ResourceManager::getResourceAmount(Resource resource) const
 {
     return resources_.at(resource);
+}
+
+void ResourceManager::newGenerationPeople()
+{
+    int male = people_.at(Gender::male);
+    int female = people_.at(Gender::female);
+
+    int pairs = std::min(male, female);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, pairs);
+    int newMales = dis(gen);
+    int newFemales = pairs - newMales;
+
+    people_[Gender::male] += newMales;
+    people_[Gender::female] += newFemales;
+}
+
+void ResourceManager::generateMoney()
+{
+    money_ += (people_[Gender::male]+people_[Gender::female])*0.15;
 }
 
 bool ResourceManager::hasEnoughResources(Resource resource, int amount) const

@@ -5,8 +5,10 @@
 #include <unordered_map>
 #include <algorithm>
 #include "building.hpp"
+#include "iBuildingManager.hpp"
 
-class BuildingManager
+class BuildingManager 
+    : public IBuildingManager
 {
 private:
     std::vector<Building> buildings_;
@@ -17,12 +19,11 @@ public:
     BuildingManager();
     ~BuildingManager() = default;
 
-    void addBuilding(BuildingType type);
-    bool removeBuilding(const int index);
-
-    int getCostBuilding(BuildingType type) const;
-    Building* getBuilding(const int index) const;
-    const std::vector<Building>& getBuildings() const;
+    const std::vector<Building>& getBuildings() const override;
+    void addBuilding(BuildingType type) override;
+    bool removeBuilding(const int index) override;
+    Building* getBuilding(const int index) override;
+    int getCostBuilding(BuildingType type) const override;
 };
 
 #endif

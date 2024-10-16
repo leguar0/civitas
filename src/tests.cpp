@@ -2,17 +2,30 @@
 #include <iostream>
 #include "city.hpp"
 #include "building.hpp"
+#include "buildingManager.hpp"
+#include "resourceManager.hpp"
 
 
 struct CityTest : public ::testing::Test {
-    City city;
+    BuildingManager buildingManager;
+    ResourceManager resourceManager;
+    City* city;
+
+    void SetUp() override {
+        city = new City(std::make_shared<BuildingManager>(buildingManager),
+                        std::make_shared<ResourceManager>(resourceManager));
+    }
+
+    void TearDown() override {
+        delete city;
+    }
 };
 
 
 TEST_F(CityTest, CanAddBuildingToCity)
 {
-    EXPECT_TRUE(city.addBuilding(BuildingType::house));
-    std::cout << city.getMoney() << std::endl;
+    EXPECT_TRUE(city->addBuilding(BuildingType::house));
+    std::cout << city->getMoney() << std::endl;
 }
 
 /*

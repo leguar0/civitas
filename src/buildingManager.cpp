@@ -41,7 +41,7 @@ int BuildingManager::getCostBuilding(BuildingType type) const
     return buildingCosts_.at(type);
 }
 
-Building *BuildingManager::getBuilding(const int index) const
+Building *BuildingManager::getBuilding(const int index)
 {
     auto it = findBuildingIterator(index);
     

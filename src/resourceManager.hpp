@@ -2,23 +2,10 @@
 #define RESOURCE_MANAGER_HPP
 
 #include <unordered_map>
-
-enum class Gender 
-{
-    male,
-    female
-};
-
-enum class Resource
-{
-    stone, 
-    wood,
-    coal,
-    water,
-    food
-};
+#include "iResourceManager.hpp"
 
 class ResourceManager
+    : public IResourceManager
 {
 private:
     std::unordered_map<Gender, int> people_;
@@ -28,17 +15,15 @@ public:
     ResourceManager();
     ~ResourceManager() = default;
 
-    bool removeMoney(int money);
-    
+    int getPeople() const override;
+    double getMoney() const override;
+    int getResourceAmount(Resource resource) const override;
+    bool removeMoney(double amount) override;
+    void addResource(Resource resource, int amount) override;
+    bool consumeResource(Resource resource, int amount) override;
+
     void newGenerationPeople();
     void generateMoney();
-
-    void addResource(Resource resource, int amount);
-    bool consumeResource(Resource resource, int amount);
-
-    int getPeople() const;
-    double getMoney() const;
-    int getResourceAmount(Resource resource) const;
     bool hasEnoughResources(Resource resource, int amount) const;
 };
 
