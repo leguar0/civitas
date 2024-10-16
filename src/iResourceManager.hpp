@@ -1,20 +1,7 @@
 #ifndef I_RESOURCE_MANAGER_HPP
 #define I_RESOURCE_MANAGER_HPP
 
-enum class Gender 
-{
-    male,
-    female
-};
-
-enum class Resource
-{
-    stone, 
-    wood,
-    coal,
-    water,
-    food
-};
+#include "resource.hpp"
 
 class IResourceManager
 {
