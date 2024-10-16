@@ -8,22 +8,16 @@ ApplicationWindow {
     height: 600
     title: "City Grid"
 
-    Button {
-        text: qsTr("Click me")
-        onClicked: Backend.doStuff()
-    }
-
-/*
     Item {
         id: city
         Column {
             spacing: 0
             Repeater {
-                model: root.height / 50
+                model: 600 / 50
                 delegate: Row {
                     spacing: 0
                     Repeater {
-                        model: root.width / 50
+                        model: 800 / 50
                         delegate: Rectangle {
                             width: 50
                             height: 50
@@ -43,5 +37,4 @@ ApplicationWindow {
             }
         }
     }
-    */
 }
