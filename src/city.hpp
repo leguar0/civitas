@@ -9,7 +9,6 @@
 
 class City
 {
-private:
     std::shared_ptr<IBuildingManager> buildingManager_;
     std::shared_ptr<IResourceManager> resourceManager_;
 public:
@@ -17,12 +16,11 @@ public:
          std::shared_ptr<IResourceManager> resourceManager);
     ~City() = default;
 
-    const std::vector<Building>& getBuildings() const;
+    const std::vector<std::unique_ptr<Building>>& getBuildings() const;
     Building* getBuilding(const int index);
     int getPeople() const;
     double getMoney() const;
-
-    bool addBuilding(BuildingType type);
+    bool addBuilding(std::unique_ptr<Building> building);
     bool removeBuilding(const int id);
 };
 

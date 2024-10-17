@@ -7,9 +7,6 @@ set(SOURCES
     src/building.cpp
     src/buildingManager.cpp
     src/resourceManager.cpp
-    src/resource.hpp
-    src/iResourceManager.hpp
-    src/iBuildingManager.hpp
 )
 
 set(CMAKE_AUTOUIC ON)

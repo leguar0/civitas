@@ -5,15 +5,15 @@
 #include "buildingManager.hpp"
 #include "resourceManager.hpp"
 
-
 struct CityTest : public ::testing::Test {
-    BuildingManager buildingManager;
-    ResourceManager resourceManager;
+    std::shared_ptr<BuildingManager> buildingManager; 
+    std::shared_ptr<ResourceManager> resourceManager;
     City* city;
 
     void SetUp() override {
-        city = new City(std::make_shared<BuildingManager>(buildingManager),
-                        std::make_shared<ResourceManager>(resourceManager));
+        buildingManager = std::make_shared<BuildingManager>();
+        resourceManager = std::make_shared<ResourceManager>();
+        city = new City(buildingManager, resourceManager); 
     }
 
     void TearDown() override {
@@ -21,19 +21,18 @@ struct CityTest : public ::testing::Test {
     }
 };
 
-
 TEST_F(CityTest, CanAddBuildingToCity)
 {
-    EXPECT_TRUE(city->addBuilding(BuildingType::house));
-    std::cout << city->getMoney() << std::endl;
+    EXPECT_TRUE(city->addBuilding(std::make_unique<House>())); 
+    std::cout << city->getMoney() << std::endl; 
 }
 
 /*
 TEST_F(CityTest, CanAddPeopleToBuilding)
 {
     int value = 5;
-    city.addBuilding(BuildingType::house);
-    EXPECT_TRUE(city.addPeopleToBuilding(0, value));
-    EXPECT_EQ(city.getBuilding(1)->getPeople(), value);
+    city->addBuilding(BuildingType::house); 
+    EXPECT_TRUE(city->addPeopleToBuilding(0, value));
+    EXPECT_EQ(city->getBuilding(0)->getPeople(), value);
 }
 */

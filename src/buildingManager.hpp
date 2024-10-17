@@ -4,26 +4,33 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <memory>
 #include "building.hpp"
-#include "iBuildingManager.hpp"
+
+class IBuildingManager
+{
+public:
+    virtual ~IBuildingManager() = default;
+    virtual const std::vector<std::unique_ptr<Building>>& getBuildings() const = 0;
+    virtual Building* getBuilding(const int index) = 0;
+    virtual void addBuilding(std::unique_ptr<Building> building) = 0;
+    virtual bool removeBuilding(const int id) = 0;
+};
 
 class BuildingManager 
     : public IBuildingManager
 {
 private:
-    std::vector<Building> buildings_;
-    std::unordered_map<BuildingType, double> buildingCosts_;
-
+    std::vector<std::unique_ptr<Building>> buildings_;
     auto findBuildingIterator(const int index) const;
 public:
-    BuildingManager();
+    BuildingManager() = default;
     ~BuildingManager() = default;
 
-    const std::vector<Building>& getBuildings() const override;
-    void addBuilding(BuildingType type) override;
+    const std::vector<std::unique_ptr<Building>>& getBuildings() const override;
+    void addBuilding(std::unique_ptr<Building> building) override;
     bool removeBuilding(const int index) override;
     Building* getBuilding(const int index) override;
-    int getCostBuilding(BuildingType type) const override;
 };
 
 #endif

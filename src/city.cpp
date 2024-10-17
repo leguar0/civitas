@@ -2,11 +2,11 @@
 
 City::City(std::shared_ptr<IBuildingManager> buildingManager, 
            std::shared_ptr<IResourceManager> resourceManager)
-    : buildingManager_(std::move(buildingManager))
-    , resourceManager_(std::move(resourceManager))
+    : buildingManager_(std::move(buildingManager)),
+      resourceManager_(std::move(resourceManager))
 {}
 
-const std::vector<Building>& City::getBuildings() const
+const std::vector<std::unique_ptr<Building>>& City::getBuildings() const
 {
     return buildingManager_->getBuildings();
 }
@@ -26,11 +26,11 @@ double City::getMoney() const
     return resourceManager_->getMoney();
 }
 
-bool City::addBuilding(BuildingType type)
+bool City::addBuilding(std::unique_ptr<Building> building)
 {
-    double cost = buildingManager_->getCostBuilding(type);
+    double cost = 0.5;
     if (resourceManager_->removeMoney(cost)) {
-        buildingManager_->addBuilding(type);
+        buildingManager_->addBuilding(std::move(building));
         return true;    
     }
 

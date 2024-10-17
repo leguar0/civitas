@@ -2,27 +2,14 @@
 
 auto BuildingManager::findBuildingIterator(const int index) const
 {
-    return std::find_if(buildings_.begin(), buildings_.end(), [&](const Building& b) {
-        return b.getId() == index;
+    return std::find_if(buildings_.begin(), buildings_.end(), [&](const std::unique_ptr<Building>& building) {
+        return building->getId() == index;
     });
 }
 
-BuildingManager::BuildingManager()
+void BuildingManager::addBuilding(std::unique_ptr<Building> building)
 {
-    buildingCosts_.insert({
-        {BuildingType::hospital, 500.0},
-        {BuildingType::house, 25.0},
-        {BuildingType::police_station, 50.0},
-        {BuildingType::post, 75.0},
-        {BuildingType::power_station, 250.0},
-        {BuildingType::subway, 650.0},
-        {BuildingType::apartment_building, 1000.0}
-    });
-}
-
-void BuildingManager::addBuilding(BuildingType type)
-{
-    buildings_.push_back(Building {type});
+    buildings_.push_back(std::move(building));
 }
 
 bool BuildingManager::removeBuilding(const int index)
@@ -30,29 +17,18 @@ bool BuildingManager::removeBuilding(const int index)
     auto it = findBuildingIterator(index);
     if (it != buildings_.end()) {
         buildings_.erase(it);
-
         return true;
     }
     return false;
 }
 
-int BuildingManager::getCostBuilding(BuildingType type) const
-{
-    return buildingCosts_.at(type);
-}
-
-Building *BuildingManager::getBuilding(const int index)
+Building* BuildingManager::getBuilding(const int index)
 {
     auto it = findBuildingIterator(index);
-    
-    if (it != buildings_.end()) {
-        return const_cast<Building*>(&(*it)); 
-    } else {
-        return nullptr; 
-    }
+    return (it != buildings_.end()) ? it->get() : nullptr;
 }
 
-const std::vector<Building>& BuildingManager::getBuildings() const
+const std::vector<std::unique_ptr<Building>>& BuildingManager::getBuildings() const
 {
     return buildings_;
 }
