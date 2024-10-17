@@ -28,6 +28,8 @@ public:
     virtual bool removeMoney(double amount) = 0;
     virtual void addResource(Resource resource, int amount) = 0;
     virtual bool consumeResource(Resource resource , int amount) = 0;
+    virtual void increasePopulation() = 0;
+    virtual void increaseMoney() = 0;
 };
 
 class ResourceManager
@@ -47,9 +49,8 @@ public:
     bool removeMoney(double amount) override;
     void addResource(Resource resource, int amount) override;
     bool consumeResource(Resource resource, int amount) override;
-
-    void increasePopulation();
-    void increaseMoney();
+    void increasePopulation() override;
+    void increaseMoney() override;
     bool hasEnoughResources(Resource resource, int amount) const;
 };
 

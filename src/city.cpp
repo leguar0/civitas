@@ -1,13 +1,16 @@
 #include "city.hpp"
 
-City::City(std::shared_ptr<IBuildingManager> buildingManager, 
+#include <iostream>
+#include <QDebug>
+
+City::City(std::shared_ptr<IBuildingManager> buildingManager,
            std::shared_ptr<IResourceManager> resourceManager)
     : buildingManager_(std::move(buildingManager)),
       resourceManager_(std::move(resourceManager)),
       timer_(new QTimer(this))
 {
     connect(timer_, &QTimer::timeout, this, &City::updateResources);
-    timer_->start(1000);
+    timer_->start(3000);
 }
 
 const std::vector<std::unique_ptr<Building>>& City::getBuildings() const
@@ -50,15 +53,9 @@ bool City::removeBuilding(const int id)
 
 void City::updateResources()
 {
-    auto resourceManagerPtr = std::dynamic_pointer_cast<ResourceManager>(resourceManager_);
-    
-    if (resourceManagerPtr) {
-        resourceManagerPtr->increaseMoney();
-        resourceManagerPtr->increasePopulation();
+    resourceManager_->increaseMoney();
+    resourceManager_->increasePopulation();
 
-        emit moneyChanged();
-        emit populationChanged();
-    } else {
-        qWarning("Failed to cast to ResourceManager");
-    }
+    emit populationChanged();
+    emit moneyChanged();
 }

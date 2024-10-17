@@ -23,11 +23,21 @@ struct CityTest : public ::testing::Test {
 
 TEST_F(CityTest, CanAddBuildingToCity)
 {
-    House house();
     // EXPECT_TRUE(city->addBuilding(house));
     std::cout << city->getMoney() << std::endl; 
 }
 
+/*
+TEST_F(CityTest, ImprovePopulation)
+{
+    int i = 0;
+    while(i!=10)
+    {
+        std::cout << city->getPeople() << std::endl;
+        ++i;
+    }
+}
+*/
 /*
 TEST_F(CityTest, CanAddPeopleToBuilding)
 {

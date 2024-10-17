@@ -9,7 +9,6 @@ ApplicationWindow {
     title: "City Grid"
 
     Item {
-        id: city
         anchors.fill: parent
 
         Column {
@@ -39,7 +38,6 @@ ApplicationWindow {
             }
         }
     }
-
 
     Column {
         anchors.top: parent.top

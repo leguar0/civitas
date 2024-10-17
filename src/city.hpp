@@ -29,8 +29,8 @@ public:
     Building* getBuilding(const int index);
     int getPeople() const;
     double getMoney() const;
-    Q_INVOKABLE bool addBuilding(Building* building);
-    Q_INVOKABLE bool removeBuilding(const int id);
+    bool addBuilding(Building* building);
+    bool removeBuilding(const int id);
 
     void updateResources();
 signals:
