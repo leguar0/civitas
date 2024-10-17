@@ -13,12 +13,10 @@ enum class BuildingType {
 };
 */
 
-class Buildable 
+class Manageable 
 {
 public:
-    virtual void build() = 0;
     virtual void upgrade() = 0;
-    virtual void demolish() = 0;
 };
 
 class Workable
@@ -28,22 +26,21 @@ public:
 };
 
 class Building
-    : public Buildable
+    : public Manageable
 {
 private:
     static int nextId;
 
     int id_;
+    int level;
 public:
     Building();
     ~Building() = default;
 
     void upgrade();
-    void demolish();
-
-    virtual void build() = 0;
 
     int getId() const;
+    int getLevel() const;
 };
 
 class House
@@ -54,8 +51,6 @@ private:
 public:
     House() = default;
     ~House() = default;
-
-    void build();
 };
 
 class Mine
@@ -66,8 +61,7 @@ public:
     Mine() = default;
     ~Mine() = default;
 
-    void build();
-    double generateMoney();
+    double generateMoney() override;
 };
 
 class PoliceStation
@@ -78,8 +72,7 @@ public:
     PoliceStation() = default;
     ~PoliceStation() = default;
 
-    void build();
-    double generateMoney();
+    double generateMoney() override;
 };
 
 class Hospital
@@ -90,8 +83,7 @@ public:
     Hospital() = default;
     ~Hospital() = default;
 
-    void build();
-    double generateMoney();
+    double generateMoney() override;
 };
 
 #endif

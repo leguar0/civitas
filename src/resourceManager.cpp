@@ -63,7 +63,7 @@ int ResourceManager::getResourceAmount(Resource resource) const
     return resources_.at(resource);
 }
 
-void ResourceManager::newGenerationPeople()
+void ResourceManager::increasePopulation()
 {
     int male = people_.at(Gender::male);
     int female = people_.at(Gender::female);
@@ -79,7 +79,7 @@ void ResourceManager::newGenerationPeople()
     people_[Gender::female] += newFemales;
 }
 
-void ResourceManager::generateMoney()
+void ResourceManager::increaseMoney()
 {
     money_ += (people_[Gender::male]+people_[Gender::female])*0.15;
 }

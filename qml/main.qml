@@ -10,6 +10,8 @@ ApplicationWindow {
 
     Item {
         id: city
+        anchors.fill: parent
+
         Column {
             spacing: 0
             Repeater {
@@ -35,6 +37,24 @@ ApplicationWindow {
                     }
                 }
             }
+        }
+    }
+
+
+    Column {
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 10
+        z: 1
+
+        Text {
+            text: "Liczba mieszkańców: " + city.people
+            font.pointSize: 20
+        }
+
+        Text {
+            text: "Ilość pieniędzy: " + city.money
+            font.pointSize: 20
         }
     }
 }

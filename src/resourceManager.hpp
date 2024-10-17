@@ -48,8 +48,8 @@ public:
     void addResource(Resource resource, int amount) override;
     bool consumeResource(Resource resource, int amount) override;
 
-    void newGenerationPeople();
-    void generateMoney();
+    void increasePopulation();
+    void increaseMoney();
     bool hasEnoughResources(Resource resource, int amount) const;
 };
 

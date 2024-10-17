@@ -16,11 +16,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_PREFIX_PATH "/home/norbert/Qt/6.8.0/gcc_64")
 
-add_executable(${PROJECT_NAME} src/main.cpp ${SOURCES} qml/qml.qrc qml/main.qml)
-
 find_package(Qt6 REQUIRED COMPONENTS Core Quick Gui Qml)
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Quick Qt6::Core Qt6::Gui Qt6::Qml)
+add_executable(${PROJECT_NAME} src/main.cpp ${SOURCES} qml/qml.qrc qml/main.qml)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Quick Qt6::Core Qt6::Gui Qt6::Qml)
 
 include_directories("/home/norbert/Qt/6.8.0/gcc_64/include")
 
@@ -37,7 +36,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(${PROJECT_NAME}-ut src/tests.cpp ${SOURCES})
-target_link_libraries(${PROJECT_NAME}-ut GTest::gtest_main)
+target_link_libraries(${PROJECT_NAME}-ut PRIVATE Qt6::Core GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME}-ut)

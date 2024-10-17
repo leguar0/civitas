@@ -9,10 +9,7 @@ Building::Building()
 
 void Building::upgrade()
 {
-}
-
-void Building::demolish()
-{
+    ++level;
 }
 
 int Building::getId() const
@@ -20,33 +17,22 @@ int Building::getId() const
     return id_;
 }
 
-void House::build()
+int Building::getLevel() const
 {
-}
-
-void Mine::build()
-{
+    return level;
 }
 
 double Mine::generateMoney()
 {
-    return 0.0;
-}
-
-void PoliceStation::build()
-{
+    return 0.5*getLevel();
 }
 
 double PoliceStation::generateMoney()
 {
-    return 0.0;
-}
-
-void Hospital::build()
-{
+    return 0.25*getLevel();
 }
 
 double Hospital::generateMoney()
 {
-    return 0.0;
+    return 0.1*getLevel();
 }

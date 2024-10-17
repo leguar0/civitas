@@ -1,19 +1,21 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include "city.hpp"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
 
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
+    auto buildingManager = std::make_shared<BuildingManager>();
+    auto resourceManager = std::make_shared<ResourceManager>();
+
+    City city(buildingManager, resourceManager);
+
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("city", &city);
+    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
 
     engine.load(url);
 

@@ -3,8 +3,12 @@
 City::City(std::shared_ptr<IBuildingManager> buildingManager, 
            std::shared_ptr<IResourceManager> resourceManager)
     : buildingManager_(std::move(buildingManager)),
-      resourceManager_(std::move(resourceManager))
-{}
+      resourceManager_(std::move(resourceManager)),
+      timer_(new QTimer(this))
+{
+    connect(timer_, &QTimer::timeout, this, &City::updateResources);
+    timer_->start(1000);
+}
 
 const std::vector<std::unique_ptr<Building>>& City::getBuildings() const
 {
@@ -26,11 +30,13 @@ double City::getMoney() const
     return resourceManager_->getMoney();
 }
 
-bool City::addBuilding(std::unique_ptr<Building> building)
+bool City::addBuilding(Building* building)
 {
+    auto buildingPtr = std::unique_ptr<Building>(building);
+
     double cost = 0.5;
     if (resourceManager_->removeMoney(cost)) {
-        buildingManager_->addBuilding(std::move(building));
+        buildingManager_->addBuilding(std::move(buildingPtr));
         return true;    
     }
 
@@ -40,4 +46,19 @@ bool City::addBuilding(std::unique_ptr<Building> building)
 bool City::removeBuilding(const int id)
 {
     return buildingManager_->removeBuilding(id);
+}
+
+void City::updateResources()
+{
+    auto resourceManagerPtr = std::dynamic_pointer_cast<ResourceManager>(resourceManager_);
+    
+    if (resourceManagerPtr) {
+        resourceManagerPtr->increaseMoney();
+        resourceManagerPtr->increasePopulation();
+
+        emit moneyChanged();
+        emit populationChanged();
+    } else {
+        qWarning("Failed to cast to ResourceManager");
+    }
 }
